@@ -3,264 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a73e8">
+<meta name="theme-color" content="#1a56db">
 <title>Revisão Espaçada — 1000 English Sentences</title>
-<style>
-  :root {
-    --bg: #eef1f8;
-    --card: #ffffff;
-    --ink: #1a2233;
-    --muted: #6f7789;
-    --line: #e5e9f1;
-    --primary: #3b5bdb;
-    --radius: 20px;
-    --shadow: 0 1px 2px rgba(20,30,60,.05), 0 14px 34px -12px rgba(20,30,60,.22);
-    --shadow-sm: 0 1px 2px rgba(20,30,60,.05), 0 6px 16px -10px rgba(20,30,60,.25);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: radial-gradient(1100px 480px at 50% -12%, #dee7fb 0%, rgba(222,231,251,0) 62%), var(--bg);
-    background-attachment: fixed;
-    color: var(--ink);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ---------- header ---------- */
-  header {
-    background: linear-gradient(118deg, #1a73e8 0%, #4f46e5 100%);
-    color: #fff;
-    box-shadow: 0 2px 14px rgba(26,45,110,.22);
-    position: sticky; top: 0; z-index: 50;
-  }
-  .head-inner {
-    max-width: 900px; margin: 0 auto;
-    padding: .7rem 1rem;
-    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
-  }
-  .brand { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
-  nav { display: flex; gap: .35rem; }
-  nav a, nav span {
-    font-size: .82rem; font-weight: 600; text-decoration: none;
-    padding: .34rem .7rem; border-radius: 999px;
-    color: #fff; background: rgba(255,255,255,.16);
-    transition: background .15s;
-  }
-  nav a:hover { background: rgba(255,255,255,.3); }
-  nav .current { background: #fff; color: #1a73e8; }
-
-  /* ---------- layout ---------- */
-  .wrap { max-width: 720px; margin: 0 auto; padding: 1.1rem 1rem 3rem; }
-  .hidden { display: none !important; }
-
-  /* ---------- status bar ---------- */
-  .statusbar {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: .5rem; margin-bottom: .7rem; flex-wrap: wrap;
-  }
-  .pills { display: flex; gap: .4rem; flex-wrap: wrap; }
-  .pill {
-    font-size: .78rem; font-weight: 600; color: var(--muted);
-    background: #fff; border: 1px solid var(--line);
-    padding: .28rem .65rem; border-radius: 999px;
-    display: inline-flex; align-items: center; gap: .35rem;
-    box-shadow: 0 1px 2px rgba(20,30,60,.04);
-  }
-  .pill i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-  .pill b { font-variant-numeric: tabular-nums; color: var(--ink); }
-  .dot-new { background: #3b82f6; }
-  .dot-due { background: #12a150; }
-  .dot-relearn { background: #ef5a4e; }
-  .gear {
-    border: 1px solid var(--line); background: #fff; color: var(--muted);
-    font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer;
-    padding: .3rem .7rem; border-radius: 999px;
-    box-shadow: 0 1px 2px rgba(20,30,60,.04);
-    transition: color .15s, border-color .15s;
-  }
-  .gear:hover { color: var(--primary); border-color: #c9d4ea; }
-
-  .progress {
-    height: 6px; background: #dde3ef; border-radius: 999px;
-    overflow: hidden; margin-bottom: 1.1rem;
-  }
-  .progress span {
-    display: block; height: 100%; width: 0%;
-    background: linear-gradient(90deg, #4f7ff5, #4f46e5);
-    border-radius: 999px; transition: width .35s ease;
-  }
-
-  /* ---------- ajustes ---------- */
-  .panel {
-    background: var(--card); border-radius: 16px; box-shadow: var(--shadow-sm);
-    padding: .35rem 1.1rem; margin-bottom: 1.1rem;
-  }
-  .prow {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: .75rem; padding: .7rem 0; border-bottom: 1px solid var(--line);
-    font-size: .9rem;
-  }
-  .prow:last-of-type { border-bottom: none; }
-  .prow label { color: var(--ink); font-weight: 500; }
-  .prow select {
-    font: inherit; font-size: .88rem; padding: .32rem .5rem;
-    border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink);
-  }
-  .linkbtns { display: flex; gap: .5rem; flex-wrap: wrap; }
-  .mini {
-    font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
-    border: 1px solid var(--line); background: #fff; color: var(--muted);
-    padding: .35rem .7rem; border-radius: 9px; transition: color .15s, border-color .15s;
-  }
-  .mini:hover { color: var(--primary); border-color: #c9d4ea; }
-  .mini.danger:hover { color: #d93a2e; border-color: #f3c5c0; }
-
-  /* ---------- banner ---------- */
-  .banner {
-    background: #fff8e6; border: 1px solid #f2dfae; color: #6b5312;
-    border-radius: 14px; padding: .8rem 1rem; margin-bottom: 1.1rem;
-    font-size: .88rem; display: flex; align-items: center; justify-content: space-between;
-    gap: .75rem; flex-wrap: wrap;
-  }
-
-  /* ---------- cartão ---------- */
-  .card {
-    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 1.5rem 1.5rem 1.4rem; text-align: center;
-  }
-  .card-top {
-    display: flex; align-items: center; justify-content: center; gap: .5rem;
-    margin-bottom: 1.4rem;
-  }
-  .numbadge {
-    font-size: .78rem; font-weight: 700; color: var(--muted);
-    font-variant-numeric: tabular-nums; letter-spacing: .02em;
-  }
-  .tag {
-    font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-    padding: .18rem .55rem; border-radius: 999px;
-  }
-  .tag-new { background: #e8effe; color: #2c5fd0; }
-  .tag-due { background: #e5f6ec; color: #0d7a41; }
-  .tag-relearn { background: #fdeceb; color: #c33f34; }
-
-  .sentence {
-    font-size: clamp(1.18rem, 2.7vw, 1.55rem); line-height: 1.5; font-weight: 500;
-    letter-spacing: -.01em;
-    max-width: 30em; margin: 0 auto 1.5rem;
-    animation: rise .22s ease;
-  }
-  .sentence b {
-    font-weight: 700;
-    background: linear-gradient(transparent 58%, #ffe083 58%);
-    padding: 0 .1em; border-radius: 3px;
-  }
-  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-  .play {
-    display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
-    min-height: 52px; padding: 0 1.6rem;
-    border: none; border-radius: 999px; cursor: pointer;
-    font: inherit; font-size: 1rem; font-weight: 700; color: #fff;
-    background: linear-gradient(140deg, #5581f7, #3b5bdb);
-    box-shadow: 0 11px 22px -12px rgba(59,91,219,.95);
-    transition: transform .12s ease, filter .15s;
-  }
-  .play:hover { transform: translateY(-1px); filter: brightness(1.06); }
-  .play:active { transform: scale(.98); }
-  .play .ico { font-size: .95rem; line-height: 1; }
-  .play.playing { animation: ring 1.5s ease-out infinite; }
-  @keyframes ring {
-    0%   { box-shadow: 0 0 0 0 rgba(59,91,219,.38), 0 11px 22px -12px rgba(59,91,219,.95); }
-    70%  { box-shadow: 0 0 0 16px rgba(59,91,219,0), 0 11px 22px -12px rgba(59,91,219,.95); }
-    100% { box-shadow: 0 0 0 0 rgba(59,91,219,0), 0 11px 22px -12px rgba(59,91,219,.95); }
-  }
-  .hint { font-size: .82rem; color: var(--muted); margin-top: .85rem; }
-
-  .ratings { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; margin-top: 1.5rem; }
-  .ratings button {
-    border: none; border-radius: 14px; cursor: pointer; color: #fff;
-    font: inherit; font-size: .98rem; font-weight: 700;
-    min-height: 64px; padding: .6rem .3rem;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem;
-    box-shadow: 0 8px 16px -10px rgba(10,20,40,.75);
-    transition: transform .1s, filter .15s;
-  }
-  .ratings button small { font-size: .74rem; font-weight: 600; opacity: .92; }
-  .ratings button:hover { filter: brightness(1.07); transform: translateY(-1px); }
-  .ratings button:active { transform: scale(.98); }
-  .r-again { background: linear-gradient(140deg, #f0655a, #d93a2e); }
-  .r-hard  { background: linear-gradient(140deg, #f2ab35, #dd8500); }
-  .r-good  { background: linear-gradient(140deg, #2fbd7a, #0f9d58); }
-
-  .keys { margin-top: .9rem; font-size: .74rem; color: #98a0b0; }
-  .keys kbd {
-    font-family: inherit; font-size: .72rem; background: #f1f3f8;
-    border: 1px solid var(--line); border-bottom-width: 2px;
-    border-radius: 5px; padding: .05rem .32rem; color: var(--muted);
-  }
-
-  /* ---------- fim de sessão ---------- */
-  .done { text-align: center; }
-  .done .emoji { font-size: 2.8rem; line-height: 1; }
-  .done h2 { font-size: 1.35rem; margin: .7rem 0 .3rem; letter-spacing: -.01em; }
-  .done p { color: var(--muted); font-size: .92rem; max-width: 26em; margin: 0 auto; }
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; margin: 1.5rem 0 1.2rem; }
-  .stat { background: #f7f9fd; border: 1px solid var(--line); border-radius: 14px; padding: .8rem .4rem; }
-  .stat b { display: block; font-size: 1.4rem; color: var(--primary); font-variant-numeric: tabular-nums; line-height: 1.2; }
-  .stat span { font-size: .74rem; color: var(--muted); font-weight: 600; }
-  .btn-primary {
-    font: inherit; font-size: .95rem; font-weight: 700; cursor: pointer; color: #fff;
-    background: linear-gradient(140deg, #5581f7, #3b5bdb); border: none;
-    border-radius: 13px; padding: .8rem 1.3rem;
-    box-shadow: 0 10px 20px -12px rgba(59,91,219,.9);
-    transition: filter .15s, transform .1s;
-  }
-  .btn-primary:hover { filter: brightness(1.06); }
-  .btn-primary:active { transform: scale(.98); }
-
-  .foot { text-align: center; font-size: .76rem; color: #98a0b0; margin-top: 1.4rem; }
-
-  button:focus-visible, a:focus-visible, select:focus-visible {
-    outline: 2px solid var(--primary); outline-offset: 2px;
-  }
-
-  @media (max-width: 600px) {
-    .head-inner { padding: .6rem .8rem; }
-    .brand { font-size: .9rem; }
-    .brand em { display: none; }
-    .card { padding: 1.3rem 1rem 1.2rem; border-radius: 18px; }
-    .sentence { margin-bottom: 1.3rem; }
-    .ratings { gap: .4rem; }
-    .ratings button { font-size: .88rem; min-height: 66px; }
-    .ratings button small { font-size: .7rem; }
-    .keys { display: none; }
-    .play { width: 100%; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <div class="head-inner">
-    <div class="brand">🎧 1000 English <em>Sentences</em></div>
-    <nav>
-      <a href="index.html">Lista</a>
-      <a href="practice.html">Fila</a>
-      <span class="current">Revisão</span>
-    </nav>
-  </div>
-</header>
+<header class="site-header" id="site-header"></header>
+<script src="nav.js"></script>
 
 <div class="wrap">
 
   <div class="banner hidden" id="import-banner">
     <span id="import-text"></span>
     <span class="linkbtns">
-      <button class="mini" id="import-yes">Importar</button>
-      <button class="mini" id="import-no">Ignorar</button>
+      <button class="btn" id="import-yes">Importar</button>
+      <button class="btn" id="import-no">Ignorar</button>
     </span>
   </div>
 
@@ -270,7 +28,7 @@
       <span class="pill"><i class="dot-due"></i>Revisão <b id="c-due">0</b></span>
       <span class="pill"><i class="dot-relearn"></i>Reaprender <b id="c-relearn">0</b></span>
     </div>
-    <button class="gear" id="gear" type="button" aria-expanded="false" aria-controls="panel">⚙ Ajustes</button>
+    <button class="btn" id="gear" type="button" aria-expanded="false" aria-controls="panel">Ajustes</button>
   </div>
 
   <div class="progress"><span id="bar"></span></div>
@@ -289,14 +47,14 @@
     <div class="prow">
       <label>Progresso</label>
       <span class="linkbtns">
-        <button class="mini" id="export">Exportar</button>
-        <button class="mini" id="import">Importar</button>
-        <button class="mini danger" id="reset">Reiniciar</button>
+        <button class="btn" id="export">Exportar</button>
+        <button class="btn" id="import">Importar</button>
+        <button class="btn btn-danger" id="reset">Reiniciar</button>
       </span>
     </div>
     <div class="prow">
       <label>Total iniciado</label>
-      <span id="learned-info" style="color:var(--muted);font-size:.85rem"></span>
+      <span class="note" id="learned-info"></span>
     </div>
     <input type="file" id="import-file" accept="application/json,.json" class="hidden">
   </div>
@@ -307,10 +65,10 @@
       <span class="tag tag-new" id="card-tag">Nova</span>
     </div>
 
-    <div class="sentence" id="sentence"></div>
+    <div class="card-text" id="card-text"></div>
 
     <button class="play" id="play" type="button" aria-label="Ouvir a pronúncia">
-      <span class="ico" id="play-ico">▶</span><span>Ouvir</span>
+      <span class="ico" id="play-ico">&#9654;</span><span>Ouvir</span>
     </button>
     <div class="hint" id="hint">Leia em voz alta e depois ouça para conferir</div>
 
@@ -326,7 +84,7 @@
   </div>
 
   <div class="card done hidden" id="done">
-    <div class="emoji" id="done-emoji">🎉</div>
+    <div class="emoji" id="done-emoji">&#127881;</div>
     <h2 id="done-title">Tudo em dia!</h2>
     <p id="done-text"></p>
     <div class="stats">
@@ -334,7 +92,7 @@
       <div class="stat"><b id="s-streak">0</b><span>dias seguidos</span></div>
       <div class="stat"><b id="s-learned">0</b><span>de 1000</span></div>
     </div>
-    <button class="btn-primary hidden" id="more" type="button">Estudar mais 10 frases novas</button>
+    <button class="btn btn-accent hidden" id="more" type="button">Estudar mais 10 frases novas</button>
   </div>
 
   <div class="foot">Seu progresso fica salvo neste navegador.</div>
@@ -390,7 +148,7 @@
   // -------------------------------------------------------------- elementos
   var $ = function (id) { return document.getElementById(id); };
   var elStudy = $('study'), elDone = $('done'), elPanel = $('panel');
-  var elNum = $('card-num'), elTag = $('card-tag'), elSentence = $('sentence');
+  var elNum = $('card-num'), elTag = $('card-tag'), elText = $('card-text');
   var elPlay = $('play'), elPlayIco = $('play-ico'), elHint = $('hint');
   var elBar = $('bar');
   var prev = { again: $('p-again'), hard: $('p-hard'), good: $('p-good') };
@@ -405,7 +163,6 @@
 
   function stopAudio() {
     audio.pause();
-    elPlay.classList.remove('playing');
     elPlayIco.textContent = '▶';
   }
   function play(n) {
@@ -413,14 +170,10 @@
     audio.currentTime = 0;
     var p = audio.play();
     if (p && p.catch) p.catch(function () { stopAudio(); });
-    elPlay.classList.add('playing');
     elPlayIco.textContent = '⏸';
   }
   audio.addEventListener('ended', stopAudio);
-  audio.addEventListener('pause', function () {
-    elPlay.classList.remove('playing');
-    elPlayIco.textContent = '▶';
-  });
+  audio.addEventListener('pause', function () { elPlayIco.textContent = '▶'; });
   audio.addEventListener('error', function () {
     stopAudio();
     elHint.textContent = 'Não foi possível carregar o áudio desta frase.';
@@ -531,7 +284,7 @@
     else if (card.r === 0) { elTag.textContent = 'Reaprender'; elTag.className = 'tag tag-relearn'; }
     else { elTag.textContent = 'Revisão'; elTag.className = 'tag tag-due'; }
 
-    elSentence.innerHTML = SENTENCES[current - 1];
+    elText.innerHTML = SENTENCES[current - 1];
     elHint.textContent = HINT;
 
     var base = card || newCard();
@@ -616,7 +369,7 @@
     if (remainingNew === 0) msg += ' Você já começou todas as ' + TOTAL + ' frases.';
     $('done-text').textContent = msg;
     $('done-title').textContent = today === 0 ? 'Tudo em dia!' : 'Sessão concluída!';
-    $('done-emoji').textContent = today === 0 ? '☕' : '🎉';
+    $('done-emoji').textContent = today === 0 ? '☕' : '\u{1F389}';
     $('more').classList.toggle('hidden', remainingNew === 0);
     renderStatus();
   }
@@ -728,7 +481,7 @@
     location.reload();
   });
 
-  // ------------------------------ importar da página "Practice queue"
+  // ------------------------------ importar da página "Fila"
   (function () {
     if (seenCount() > 0) return;
     var old;
@@ -739,7 +492,7 @@
 
     var banner = $('import-banner');
     $('import-text').textContent = 'Encontramos ' + nums.length +
-      ' frases marcadas como praticadas na página antiga. Trazer para a revisão?';
+      ' frases marcadas como praticadas na Fila. Trazer para a revisão?';
     banner.classList.remove('hidden');
     $('import-yes').addEventListener('click', function () {
       nums.forEach(function (n, idx) {

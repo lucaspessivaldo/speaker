@@ -4,128 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>1000 English Sentences — Speaker</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: #f5f5f5;
-    color: #222;
-    line-height: 1.6;
-  }
-  /* ---------- barra de abas (igual nas tres paginas) ---------- */
-  header {
-    background: linear-gradient(118deg, #1a73e8 0%, #4f46e5 100%);
-    color: #fff;
-    box-shadow: 0 2px 14px rgba(26,45,110,.22);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .head-inner {
-    max-width: 900px; margin: 0 auto;
-    padding: .7rem 1rem;
-    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
-  }
-  .brand { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
-  nav { display: flex; gap: .35rem; }
-  nav a, nav span {
-    font-size: .82rem; font-weight: 600; text-decoration: none;
-    padding: .34rem .7rem; border-radius: 999px;
-    color: #fff; background: rgba(255,255,255,.16);
-    transition: background .15s;
-  }
-  nav a:hover { background: rgba(255,255,255,.3); }
-  nav .current { background: #fff; color: #1a73e8; }
-  nav a:focus-visible, nav span:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .container {
-    max-width: 900px;
-    margin: 1.5rem auto;
-    padding: 0 1rem;
-  }
-  .controls {
-    display: flex;
-    gap: .5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
-  .controls input {
-    flex: 1;
-    min-width: 200px;
-    padding: .5rem .75rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: .95rem;
-  }
-  .sentence {
-    display: flex;
-    align-items: flex-start;
-    gap: .75rem;
-    background: #fff;
-    border-radius: 8px;
-    padding: .75rem 1rem;
-    margin-bottom: .5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    transition: background .15s;
-  }
-  .sentence:hover { background: #f0f6ff; }
-  .sentence.playing { background: #e3f0ff; border-left: 3px solid #1a73e8; }
-  .num {
-    min-width: 3rem;
-    font-weight: 700;
-    color: #1a73e8;
-    font-size: .95rem;
-    padding-top: 2px;
-    text-align: right;
-  }
-  .text {
-    flex: 1;
-    font-size: 1rem;
-  }
-  .text b { color: #c62828; }
-  .play-btn {
-    background: #1a73e8;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background .15s, transform .1s;
-  }
-  .play-btn:hover { background: #1557b0; transform: scale(1.1); }
-  .play-btn.active { background: #c62828; }
-  .hidden { display: none !important; }
-  @media (max-width: 600px) {
-    .head-inner { padding: .6rem .8rem; }
-    .brand { font-size: .9rem; }
-    .brand em { display: none; }
-    .sentence { padding: .6rem .7rem; gap: .5rem; }
-    .num { min-width: 2.2rem; font-size: .85rem; }
-    .text { font-size: .92rem; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-  <div class="head-inner">
-    <div class="brand">&#127911; 1000 English <em>Sentences</em></div>
-    <nav>
-      <span class="current">Lista</span>
-      <a href="practice.html">Fila</a>
-      <a href="review.html">Revisão</a>
-    </nav>
-  </div>
-</header>
+<header class="site-header" id="site-header"></header>
+<script src="nav.js"></script>
 
 <div class="container">
   <div class="controls">
-    <input type="text" id="search" placeholder="Search sentences..." autocomplete="off">
+    <input type="text" id="search" placeholder="Buscar frases..." autocomplete="off">
   </div>
 
   <div id="list">
