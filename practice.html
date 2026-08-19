@@ -12,31 +12,31 @@
     color: #222;
     line-height: 1.6;
   }
+  /* ---------- barra de abas (igual nas tres paginas) ---------- */
   header {
-    background: #1a73e8;
+    background: linear-gradient(118deg, #1a73e8 0%, #4f46e5 100%);
     color: #fff;
-    padding: 1.2rem 1rem;
-    text-align: center;
+    box-shadow: 0 2px 14px rgba(26,45,110,.22);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
   }
-  header h1 { font-size: 1.4rem; font-weight: 600; }
-  header p { font-size: .85rem; opacity: .85; margin-top: .25rem; }
-  .nav-link {
-    display: inline-block;
-    margin-top: .65rem;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,.65);
-    border-radius: 6px;
-    padding: .35rem .7rem;
-    text-decoration: none;
-    font-size: .88rem;
-    font-weight: 600;
+  .head-inner {
+    max-width: 900px; margin: 0 auto;
+    padding: .7rem 1rem;
+    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
   }
-  .nav-link:hover { background: rgba(255,255,255,.12); }
-  .nav-link + .nav-link { margin-left: .4rem; }
+  .brand { font-size: 1rem; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+  nav { display: flex; gap: .35rem; }
+  nav a, nav span {
+    font-size: .82rem; font-weight: 600; text-decoration: none;
+    padding: .34rem .7rem; border-radius: 999px;
+    color: #fff; background: rgba(255,255,255,.16);
+    transition: background .15s;
+  }
+  nav a:hover { background: rgba(255,255,255,.3); }
+  nav .current { background: #fff; color: #1a73e8; }
+  nav a:focus-visible, nav span:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .container {
     max-width: 900px;
     margin: 1.5rem auto;
@@ -145,6 +145,9 @@
   }
   .hidden { display: none !important; }
   @media (max-width: 600px) {
+    .head-inner { padding: .6rem .8rem; }
+    .brand { font-size: .9rem; }
+    .brand em { display: none; }
     .sentence { flex-wrap: wrap; padding: .6rem .7rem; gap: .5rem; }
     .num { min-width: 2.2rem; font-size: .85rem; }
     .text { font-size: .92rem; }
@@ -156,10 +159,14 @@
 <body>
 
 <header>
-  <h1>&#128264; Practice Queue</h1>
-  <p>Mark sentences as practiced to remove them from this list</p>
-  <a class="nav-link" href="index.html">All sentences</a>
-  <a class="nav-link" href="review.html">Revisão espaçada</a>
+  <div class="head-inner">
+    <div class="brand">&#127911; 1000 English <em>Sentences</em></div>
+    <nav>
+      <a href="index.html">Lista</a>
+      <span class="current">Fila</span>
+      <a href="review.html">Revisão</a>
+    </nav>
+  </div>
 </header>
 
 <div class="container">
